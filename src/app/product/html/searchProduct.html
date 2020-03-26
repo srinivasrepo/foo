@@ -1,0 +1,37 @@
+
+<mat-card class="mat-elevation-z1" style="margin-top: 2%;margin-left: 3%;width: 90%;">
+    <h2 style="text-align: center;color: rgb(62, 83, 24);margin-top: 1%;"><span style="padding: 1%; border-bottom: solid 2px  rgb(62, 83, 24);border-top: solid 2px  rgb(62, 83, 24)">PRODUCT MODULE</span> </h2>  
+<br>
+    <div style="margin-left: 1%;">
+        <form [formGroup]="searchProductFormGroup">
+        <mat-form-field >
+          <mat-label>Product Name</mat-label> 
+          <input matInput formControlName="productNameFCN">
+        </mat-form-field>
+
+        <mat-form-field style="margin-left: 3%;">
+            <mat-label>Select Status</mat-label>
+            <mat-select formControlName="statusIdFCN" >
+              <mat-option *ngFor="let statusObject of productSelectStatusArray" [value]="statusObject.statusID">
+               {{statusObject.status}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+<br>
+<br>
+
+          <div>
+            <button mat-raised-button (click)="search('searchGiven','anEmptyString')"  style="background-color: rgb(27, 87, 128);color: white;">SEARCH</button>
+            <button mat-raised-button (click)="search('searchAll','anEmptyString')" style="background-color: rgb(27, 87, 128);color: white;margin-left: 5%;" >SEARCH ALL</button>
+            <button mat-raised-button (click)="addProduct()" color="accent" style="margin-left: 5%;">ADD PRODUCT</button>
+          </div>
+    </form>
+<br>
+<br>
+    <div>
+      <cpmGridTable [headersToCpmGridTable]="headersToCpmGridTable" [dataSourceToCpmGridTable]="dataSourceToCpmGridTable" [actionsToCpmGridTable]="actionsToCpmGridTable"></cpmGridTable>
+    </div>
+    
+</div>
+
+</mat-card>

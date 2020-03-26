@@ -1,0 +1,25 @@
+<mat-card style="width: 30%;margin-left: 50%;margin-top: 5%;">
+  
+    <h3 style="margin-left: 15%;">LOGIN FORM </h3>
+  
+    <form style="margin-left: 10%;" [formGroup]="LoginFormGroup">
+        <mat-form-field appearance="outline" >
+          <mat-label >User Name</mat-label>
+          <input matInput formControlName="usernameFCN">
+        </mat-form-field>
+      <br>
+
+      <mat-form-field  appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="passwordFCN">
+      </mat-form-field>
+      <br>
+<!-- no need for onSubmit or ngSubmit -->
+      <button mat-raised-button (click)="login()" color="primary">LOGIN</button>
+
+
+       
+      </form>
+      
+
+</mat-card>
