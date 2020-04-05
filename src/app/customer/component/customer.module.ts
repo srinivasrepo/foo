@@ -9,6 +9,7 @@ import { AlertService } from 'src/app/common/services/alert.service';
 import { AppMaterialModule } from 'src/app/appMaterial.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CpmHelpersModule } from 'src/app/cpmHelpers/component/cpmHelpers.module';
 
 @NgModule({
     declarations:[SearchCustomerComponent,
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
              AppMaterialModule,
              CommonModule,
              FormsModule,
-             ReactiveFormsModule      
+             ReactiveFormsModule,
+             CpmHelpersModule      
     ],
     providers:[CustomerService,AlertService]
 })

@@ -1,1 +1,47 @@
-SearchCustomer Works!!!
+
+<mat-card class="mat-elevation-z1" style="margin-top: 2%;margin-left: 3%;width: 90%;">
+    <h2 style="text-align: center;color: rgb(62, 83, 24);margin-top: 1%;"><span style="padding: 1%; border-bottom: solid 2px  rgb(62, 83, 24);border-top: solid 2px  rgb(62, 83, 24)">CUSTOMER MODULE</span> </h2>  
+<br>
+    <div style="margin-left: 1%;">
+        <form [formGroup]="searchCustomerFormGroup">
+            <mat-form-field >
+            <mat-label>Customer Name</mat-label> 
+            <input matInput formControlName="customerNameFCN">
+            </mat-form-field>
+
+            <mat-form-field style="margin-left: 3%;">
+                <mat-label>Select Status</mat-label>
+                <mat-select formControlName="statusIdFCN" >
+                <mat-option *ngFor="let statusObject of customerSelectStatusArray" [value]="statusObject.statusID">
+                {{statusObject.status}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="margin-left: 3%;">
+                <mat-label>Select Type</mat-label>
+                <mat-select formControlName="categoryTypeIdFCN" >
+                <mat-option *ngFor="let typeObject of customerSelectTypeArray" [value]="typeObject.catItemID">
+                {{typeObject.catItem}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+    <br>
+    <br>
+
+            <div>
+                <button mat-raised-button (click)="search('searchGiven','anEmptyString')"  style="background-color: rgb(27, 87, 128);color: white;">SEARCH</button>
+                <button mat-raised-button (click)="search('searchAll','anEmptyString')" style="background-color: rgb(27, 87, 128);color: white;margin-left: 5%;" >SEARCH ALL</button>
+                <button mat-raised-button (click)="addCustomer()" color="accent" style="margin-left: 5%;">ADD CUSTOMER</button>
+            </div>
+        </form>
+<br>
+<br>
+    <div>
+      <cpmGridTable [headersToCpmGridTable]="headersToCpmGridTable" [dataSourceToCpmGridTable]="dataSourceToCpmGridTable" 
+      [actionsToCpmGridTable]="actionsToCpmGridTable" (onActionClickedEventEmmitter)="onActionClickedEventEmmitter($event)"></cpmGridTable>
+    </div>
+    
+   </div>
+
+</mat-card>

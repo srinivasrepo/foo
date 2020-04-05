@@ -1,0 +1,23 @@
+<mat-card style="width:45%; margin-top: 3%;margin-left:5% ;">
+    <div> 
+        <h2 style="text-align: center;color: rgb(33, 33, 109); margin-bottom: 1px solid black">PRODUCT DETAILS</h2>
+        <br>
+        <i><b>Product Code :</b></i> &nbsp; {{viewProductModelObject.productCode}}
+        <br>
+        <br>
+        <i><b>Product Name :</b></i> &nbsp; {{viewProductModelObject.productName}}
+        <br>
+        <br>
+        <i><b>Product Cost :</b></i> &nbsp; {{viewProductModelObject.productCost}}
+        <br>
+        <br>
+        <i><b>Status :</b></i> &nbsp; {{viewProductModelObject.status}}
+        <br>
+        <br>
+        <i><b>Description :</b></i> &nbsp; {{viewProductModelObject.description}}
+    </div>
+    <br>
+    <div style="margin-left: 70%;">
+        <button mat-raised-button color="accent" (click)="goBack()">GO BACK</button>
+    </div>
+</mat-card>

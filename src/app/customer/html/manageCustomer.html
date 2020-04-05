@@ -1,0 +1,60 @@
+<h2 style="margin-left:28%;">ADD / EDIT CUSTOMER</h2>
+
+<mat-card style="width:70% ;margin-left:3%; margin-top: 1%;">
+  
+    <form [formGroup]="manageCustomerFormGroup" >
+        <div style="margin-left:2% ;">
+             <mat-form-field>
+                 <mat-label>Customer Name</mat-label>
+                 <input matInput formControlName="customerName">
+             </mat-form-field> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+       
+             <mat-form-field>
+               <mat-select placeholder="Select type" formControlName="CustomerTypeid">
+                   <mat-option *ngFor="let obj of custTypelist" [value]="obj.catItemID">{{obj.catItem}}</mat-option>
+               </mat-select>
+           </mat-form-field>
+       </div>
+       
+
+               <br> 
+               <hr>
+               <br> 
+       
+           <div style="margin-left:2% ;">
+              <h2> ADDRESS</h2>
+               <mat-form-field>
+                   <input matInput placeholder="Address" formControlName="address">
+               </mat-form-field> &nbsp;&nbsp;
+               <br>
+
+               <mat-form-field>
+                   <mat-select placeholder="Select country" formControlName="country">
+                       <mat-option *ngFor="let obj of countryList" [value]="obj.catItemID">{{obj.catItem}}</mat-option>
+                   </mat-select>
+               </mat-form-field> &nbsp;&nbsp;
+       
+
+               <mat-form-field>
+                   <input matInput placeholder="State" formControlName="stateName">
+               </mat-form-field> &nbsp;&nbsp;
+
+               <mat-form-field>
+                   <input matInput placeholder="City" formControlName="city">
+               </mat-form-field> &nbsp;&nbsp;
+
+               <mat-form-field>
+                   <input matInput placeholder="Zip Code" formControlName="zip">
+               </mat-form-field>
+               <br>
+               <br>
+                   
+                       <button  mat-raised-button color="primary" (click)="addAddress()" style="margin-left: 70% ;">ADD ADDRESS</button>
+                   
+               </div>        
+           </form> 
+ 
+ <cpmGridTable [headersToCpmGridTable]="headersToCpmGridTable" [dataSourceToCpmGridTable]="dataSourceToCpmGridTable" 
+      [actionsToCpmGridTable]="actionsToCpmGridTable" (onActionClickedEventEmmitter)="onActionClickedEventEmmitter($event)"></cpmGridTable>
+
+</mat-card>

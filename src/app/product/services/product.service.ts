@@ -26,4 +26,24 @@ export class ProductService{
              this.productSubject.next({ result:response, purpose:"searchProduct"})
          })
     }
+
+    changeStatus(path:string, bodyObject:any){
+        this._cpmHttpServiece.postDataToService(path, bodyObject)
+         .subscribe(response=>{
+             this.productSubject.next({result:response, purpose:"changeStatus"})
+         })
+    }
+
+    manageProduct(path:string, bodyObject:any){
+       this._cpmHttpServiece.postDataToService(path, bodyObject)
+        .subscribe(responce=>{
+            this.productSubject.next({result:responce, purpose:"manageProduct"})
+        })
+    }
+    viewProduct(path:string, queryParamValue:string){
+        this._cpmHttpServiece.getDataFromService(this.commonMethods.formatString(path, [queryParamValue]))
+           .subscribe(response=>{
+               this.productSubject.next({result:response, purpose:"viewProduct"})
+           })
+    }
 }

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SearchProductModel, StatusDetails } from '../models/productModel';
+import { SearchProductModel, StatusDetailsModel, ChangeStatusModel } from '../models/productModel';
 import { ProductService } from '../services/product.service';
 import { ProductServiceUrls } from '../services/productServiceUrls';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,9 @@ export class SearchProductComponent{
 
     searchProductFormGroup:FormGroup;
     searchProductModelObject:SearchProductModel =new SearchProductModel();
-    statusDetails:StatusDetails = new StatusDetails();
+    statusDetailsModelObject:StatusDetailsModel = new StatusDetailsModel();
+    ChangeStatusModelObject:ChangeStatusModel = new ChangeStatusModel();
+
     subscription:Subscription = new Subscription();
     commonMethods:CommonMethods= new CommonMethods();
 
@@ -34,7 +36,7 @@ export class SearchProductComponent{
 
   ngAfterContentInit(){
 
-    this._productService.getStatusDetails(ProductServiceUrls.getStatusDetailsUrl, StatusDetails.code);
+    this._productService.getStatusDetails(ProductServiceUrls.getStatusDetailsUrl, StatusDetailsModel.code);
     this.search("searchAll","");
     this.prepareHeadersForCpmGridTable();
 
@@ -47,8 +49,12 @@ export class SearchProductComponent{
       if(res.purpose == "searchProduct"){
        
         this.dataSourceToCpmGridTable = this.commonMethods.increaseSno(res.result.searchList);
-        this.actionsToCpmGridTable = ["View", "Change Status", "Edit"];
-
+        this.actionsToCpmGridTable = ["View", "ChangeStatus", "Edit"];        
+      }
+      if(res.purpose == "changeStatus"){
+        if(res.result == "SUCCESS"){
+          this.search("searchGiven","anEmptyString")
+        }
         
       }
       
@@ -84,11 +90,27 @@ export class SearchProductComponent{
 
   prepareHeadersForCpmGridTable(){
     this.headersToCpmGridTable=[];
-    this.headersToCpmGridTable.push({"ColumnDef":"sno", "Header":"S NO", cellFunction:(dataSourceRowObject:any)=> `${dataSourceRowObject.sno}` });
-    this.headersToCpmGridTable.push({"ColumnDef":"productCode", "Header":"Product Code", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.productCode}`});
-    this.headersToCpmGridTable.push({"ColumnDef":"productName", "Header":"Product Name", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.productName}`});
-    this.headersToCpmGridTable.push({"ColumnDef":"productCost", "Header":"Product Cost", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.productCost}`});
-    this.headersToCpmGridTable.push({"ColumnDef":"status", "Header":"Status", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.status}`});
+    this.headersToCpmGridTable.push({"ColumnDef":"sno", "header":"S NO", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.sno}`});
+    this.headersToCpmGridTable.push({"ColumnDef":"productCode", "header":"Product Code", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.productCode}`});
+    this.headersToCpmGridTable.push({"ColumnDef":"productName", "header":"Product Name", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.productName}`});
+    this.headersToCpmGridTable.push({"ColumnDef":"productCost", "header":"Product Cost", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.productCost}`});
+    this.headersToCpmGridTable.push({"ColumnDef":"status", "header":"Status", cellFunction:(dataSourceRowObject:any)=>`${dataSourceRowObject.status}`});
+  }
+
+  onActionClickedEventEmmitter(event:any){
+console.log(event);
+   if(event.action == "View"){
+    this._router.navigate(['/viewProduct'],{queryParams:{encProductID:event.ProductRow.encProductID}})
+  }
+  if(event.action == "Edit"){
+    this._router.navigate(['/manageProduct'],{queryParams:{encProductID:event.ProductRow.encProductID}})
+  }
+  if(event.action == "ChangeStatus"){
+    this.ChangeStatusModelObject.encID = event.ProductRow.encProductID;
+    this._productService.changeStatus(ProductServiceUrls.changeStatus, this.ChangeStatusModelObject)
+  }
+
+
   }
 
   addProduct(){

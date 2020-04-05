@@ -21,9 +21,9 @@ export class CommonMethods{
 
 
 // str.replace() method replaces something only when the first aurgument whole string is present in str.
-    formatString(path:string, queryValuesArray:Array<any>):string{
-      queryValuesArray.forEach( (element,index) => {
-        path.replace('{' + index.toString() + '}', element)
+    formatString(path:string, queryValuesArray:Array<string>):string{
+      queryValuesArray.forEach((element,index)=>{
+       path = path.replace('{' + index.toString() + '}', element)
       });
       
       return path;

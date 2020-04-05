@@ -29,7 +29,8 @@
 <br>
 <br>
     <div>
-      <cpmGridTable [headersToCpmGridTable]="headersToCpmGridTable" [dataSourceToCpmGridTable]="dataSourceToCpmGridTable" [actionsToCpmGridTable]="actionsToCpmGridTable"></cpmGridTable>
+      <cpmGridTable [headersToCpmGridTable]="headersToCpmGridTable" [dataSourceToCpmGridTable]="dataSourceToCpmGridTable" 
+      [actionsToCpmGridTable]="actionsToCpmGridTable" (onActionClickedEventEmmitter)="onActionClickedEventEmmitter($event)"></cpmGridTable>
     </div>
     
 </div>

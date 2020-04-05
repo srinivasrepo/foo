@@ -1,1 +1,25 @@
-ManageProduct Works !!!
+<mat-card style="width:45%; margin-top: 3%;margin-left:5% ;">
+<h2 style="margin-left:5% ;">ADD / EDIT PRODUCT HERE</h2>
+<br>
+<form [formGroup]="manageProductFormGroup" style="margin-left:5% ;">
+ <mat-form-field >
+    <mat-label>Enter Product Name</mat-label>
+    <input matInput type="text" formControlName="productNameFCN">
+  </mat-form-field>
+  <br>
+ <mat-form-field >
+    <mat-label>Enter Product Cost</mat-label>
+    <input matInput type="number" formControlName="productCostFCN" >
+  </mat-form-field>
+  <br>
+  <mat-form-field >
+    <mat-label>Enter Description</mat-label>
+    <textarea matInput type="text" formControlName="productDescriptionFCN"></textarea>
+  </mat-form-field>
+</form>
+<br> 
+<div style="margin-left:5%">
+<button mat-raised-button color="primary" (click)="addOrEdit()">{{toggleEditAndSave}}</button>
+<button mat-raised-button color="accent" (click)="goBack()" style="margin-left: 7%;">GO BACK</button>
+</div>
+</mat-card>
